@@ -1,0 +1,1 @@
+# Módulo para configuración y parámetros 

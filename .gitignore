@@ -1,0 +1,506 @@
+# ========================================
+# GUAJIRA WIND FORECAST - .gitignore
+# ========================================
+
+# ========================================
+# VARIABLES DE ENTORNO Y CONFIGURACIÓN
+# ========================================
+
+# Archivos de variables de entorno
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.test
+
+# Archivos de configuración sensibles
+config/secrets.py
+config/credentials.json
+config/keys.json
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Archivos de configuración de APIs
+api_keys.txt
+secrets.txt
+credentials.txt
+
+# ========================================
+# PYTHON
+# ========================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# ========================================
+# DATOS Y ARCHIVOS DEL PROYECTO
+# ========================================
+
+# Datos crudos y procesados
+data/raw/*.csv
+data/raw/*.json
+data/raw/*.xlsx
+data/raw/*.parquet
+data/processed/*.csv
+data/processed/*.json
+data/processed/*.xlsx
+data/processed/*.parquet
+
+# Datos externos
+data/external/*.csv
+data/external/*.json
+data/external/*.xlsx
+data/external/*.parquet
+
+# Modelos entrenados
+models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.hdf5
+models/*.onnx
+models/*.pb
+models/checkpoints/
+models/saved_models/
+
+# Predicciones y resultados
+predictions/
+results/
+outputs/
+exports/
+
+# ========================================
+# NOTEBOOKS Y ANÁLISIS
+# ========================================
+
+# Checkpoints de notebooks
+.ipynb_checkpoints/
+
+# Archivos temporales de notebooks
+*.nbconvert.ipynb
+
+# Datos de notebooks
+notebooks/data/
+notebooks/outputs/
+notebooks/results/
+
+# ========================================
+# LOGS Y ARCHIVOS TEMPORALES
+# ========================================
+
+# Logs
+*.log
+logs/
+log/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Archivos de backup
+*.backup
+*.bak
+*.old
+backups/
+
+# Archivos de caché
+.cache/
+cache/
+__pycache__/
+
+# ========================================
+# IDEs Y EDITORES
+# ========================================
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ========================================
+# SISTEMA OPERATIVO
+# ========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+*.temp
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ========================================
+# DOCKER Y CONTENEDORES
+# ========================================
+
+# Docker
+.dockerignore
+Dockerfile.dev
+docker-compose.override.yml
+docker-compose.*.yml
+!docker-compose.yml
+
+# Contenedores
+containers/
+.docker/
+
+# ========================================
+# CLOUD Y DEPLOYMENT
+# ========================================
+
+# AWS
+.aws/
+aws-credentials.json
+
+# Google Cloud
+.gcloud/
+service-account-key.json
+
+# Azure
+.azure/
+azure-credentials.json
+
+# Heroku
+.env.local
+.env.production
+
+# ========================================
+# MONITOREO Y ANALYTICS
+# ========================================
+
+# Sentry
+.sentryclirc
+
+# LogRocket
+logrocket.json
+
+# Analytics
+analytics/
+tracking/
+
+# ========================================
+# TESTING Y CI/CD
+# ========================================
+
+# Test results
+test-results/
+test-outputs/
+.coverage
+coverage.xml
+.pytest_cache/
+
+# CI/CD
+.github/workflows/local/
+.circleci/local/
+.gitlab-ci/local/
+
+# ========================================
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# ========================================
+
+# Archivos de configuración local
+config/local.py
+config/local.json
+config/local.yaml
+
+# Archivos de base de datos local
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de sesión
+session.json
+session.pkl
+
+# Archivos de estado
+state.json
+state.pkl
+
+# Archivos de configuración de modelos
+model_config.json
+training_config.json
+
+# Archivos de métricas
+metrics.json
+metrics.csv
+
+# Archivos de experimentos
+experiments/
+runs/
+wandb/
+
+# ========================================
+# ARCHIVOS DE SEGURIDAD
+# ========================================
+
+# Certificados SSL
+*.crt
+*.cert
+*.pem
+*.key
+
+# Archivos de autenticación
+auth.json
+auth.yaml
+auth.yml
+
+# Archivos de tokens
+tokens.json
+tokens.yaml
+tokens.yml
+
+# ========================================
+# ARCHIVOS DE BACKUP Y VERSIONES
+# ========================================
+
+# Archivos de backup
+*.backup
+*.bak
+*.old
+*.orig
+
+# Archivos de versiones
+*.v1
+*.v2
+*.v3
+
+# Archivos de respaldo
+backup/
+backups/
+backup_*/
+
+# ========================================
+# ARCHIVOS TEMPORALES ESPECÍFICOS
+# ========================================
+
+# Archivos de descarga
+downloads/
+download/
+
+# Archivos de cache de APIs
+api_cache/
+cache/
+
+# Archivos de procesamiento temporal
+temp/
+tmp/
+.tmp/
+
+# ========================================
+# NOTAS IMPORTANTES
+# ========================================
+
+# 1. Este archivo ignora datos sensibles y archivos temporales
+# 2. Los datos de ejemplo pueden estar en data/sample/
+# 3. Los modelos de ejemplo pueden estar en models/sample/
+# 4. Las configuraciones de ejemplo pueden estar en config/sample/
+
+# ========================================
+# EXCEPCIONES (archivos que SÍ queremos)
+# ========================================
+
+# Permitir archivos de ejemplo
+!data/sample/
+!models/sample/
+!config/sample/
+!.env.example
+!requirements.txt
+!README.md
+!LICENSE 

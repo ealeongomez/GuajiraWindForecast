@@ -1,0 +1,1 @@
+# Módulo para consumo de APIs climáticas 
