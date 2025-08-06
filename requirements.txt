@@ -1,247 +1,82 @@
-# Dependencias del proyecto GuajiraWindForecast
-# API y servicios web
-requests>=2.31.0
-aiohttp>=3.8.0
-
-# Procesamiento de datos
-pandas>=2.0.0
-numpy>=1.24.0
-scipy>=1.10.0
-
-# Machine Learning y forecasting
-scikit-learn>=1.3.0
-prophet>=1.1.0
-statsmodels>=0.14.0
-
-# Chatbot y NLP
-langchain>=0.1.0
-openai>=1.0.0
-python-telegram-bot>=20.0
-
-# Visualización
-matplotlib>=3.7.0
-seaborn>=0.12.0
-plotly>=5.15.0
-
-# Servidor web
-fastapi>=0.100.0
-uvicorn>=0.23.0
-
-# Utilidades
-python-dotenv>=1.0.0
-pydantic>=2.0.0 
-
-# ========================================
-# CONFIGURACIÓN DE API KEYS Y CONTRASEÑAS
-# ========================================
-# GuajiraWindForecast - Variables de Entorno
-# ========================================
-
-# ========================================
-# APIs CLIMÁTICAS
-# ========================================
-
-# OpenWeather API (opcional - requiere registro)
-# Obtener en: https://openweathermap.org/api
-OPENWEATHER_API_KEY=tu_api_key_aqui
-
-# WeatherAPI (opcional - requiere registro)
-# Obtener en: https://www.weatherapi.com/
-WEATHERAPI_KEY=tu_api_key_aqui
-
-# AccuWeather API (opcional - requiere registro)
-# Obtener en: https://developer.accuweather.com/
-ACCUWEATHER_API_KEY=tu_api_key_aqui
-
-# ========================================
-# APIs DE INTELIGENCIA ARTIFICIAL
-# ========================================
-
-# OpenAI API (para chatbot)
-# Obtener en: https://platform.openai.com/api-keys
-OPENAI_API_KEY=tu_api_key_aqui
-
-# Anthropic Claude API (alternativa a OpenAI)
-# Obtener en: https://console.anthropic.com/
-ANTHROPIC_API_KEY=tu_api_key_aqui
-
-# Google AI API (Gemini)
-# Obtener en: https://makersuite.google.com/app/apikey
-GOOGLE_AI_API_KEY=tu_api_key_aqui
-
-# ========================================
-# PLATAFORMAS DE CHATBOT
-# ========================================
-
-# Telegram Bot Token
-# Obtener en: https://t.me/BotFather
-TELEGRAM_BOT_TOKEN=tu_bot_token_aqui
-
-# WhatsApp Business API (opcional)
-# Obtener en: https://developers.facebook.com/docs/whatsapp
-WHATSAPP_API_KEY=tu_api_key_aqui
-
-# Discord Bot Token (opcional)
-# Obtener en: https://discord.com/developers/applications
-DISCORD_BOT_TOKEN=tu_bot_token_aqui
-
-# ========================================
-# BASES DE DATOS
-# ========================================
-
-# PostgreSQL
-DATABASE_URL=postgresql://usuario:contraseña@localhost:5432/guajira_wind_db
-
-# MySQL
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_DATABASE=guajira_wind_db
-MYSQL_USER=usuario
-MYSQL_PASSWORD=contraseña
-
-# MongoDB
-MONGODB_URI=mongodb://usuario:contraseña@localhost:27017/guajira_wind_db
-
-# SQLite (para desarrollo local)
-SQLITE_DATABASE_PATH=data/guajira_wind.db
-
-# ========================================
-# SERVICIOS EN LA NUBE
-# ========================================
-
-# AWS (opcional)
-AWS_ACCESS_KEY_ID=tu_access_key_aqui
-AWS_SECRET_ACCESS_KEY=tu_secret_key_aqui
-AWS_REGION=us-east-1
-
-# Google Cloud (opcional)
-GOOGLE_CLOUD_PROJECT_ID=tu_project_id_aqui
-GOOGLE_CLOUD_CREDENTIALS_FILE=path/to/credentials.json
-
-# Azure (opcional)
-AZURE_SUBSCRIPTION_ID=tu_subscription_id_aqui
-AZURE_TENANT_ID=tu_tenant_id_aqui
-AZURE_CLIENT_ID=tu_client_id_aqui
-AZURE_CLIENT_SECRET=tu_client_secret_aqui
-
-# ========================================
-# CONFIGURACIÓN DEL SERVIDOR
-# ========================================
-
-# Configuración del servidor web
-SERVER_HOST=localhost
-SERVER_PORT=8000
-SERVER_DEBUG=True
-
-# Configuración de seguridad
-SECRET_KEY=tu_secret_key_super_segura_aqui
-JWT_SECRET_KEY=tu_jwt_secret_key_aqui
-
-# ========================================
-# CONFIGURACIÓN DE EMAIL
-# ========================================
-
-# Gmail SMTP
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=tu_email@gmail.com
-EMAIL_HOST_PASSWORD=tu_app_password_aqui
-
-# Outlook SMTP
-OUTLOOK_HOST=smtp-mail.outlook.com
-OUTLOOK_PORT=587
-OUTLOOK_USER=tu_email@outlook.com
-OUTLOOK_PASSWORD=tu_contraseña_aqui
-
-# ========================================
-# CONFIGURACIÓN DE MONITOREO
-# ========================================
-
-# Sentry (para monitoreo de errores)
-SENTRY_DSN=tu_sentry_dsn_aqui
-
-# LogRocket (para analytics)
-LOGROCKET_APP_ID=tu_logrocket_app_id_aqui
-
-# ========================================
-# CONFIGURACIÓN DE DESARROLLO
-# ========================================
-
-# Entorno de desarrollo
-ENVIRONMENT=development
-DEBUG=True
-LOG_LEVEL=DEBUG
-
-# Configuración de caché
-REDIS_URL=redis://localhost:6379
-CACHE_TTL=3600
-
-# ========================================
-# CONFIGURACIÓN ESPECÍFICA DEL PROYECTO
-# ========================================
-
-# Rutas de datos
-DATA_RAW_PATH=data/raw
-DATA_PROCESSED_PATH=data/processed
-DATA_EXTERNAL_PATH=data/external
-
-# Configuración de modelos
-MODEL_PATH=models/
-MODEL_VERSION=1.0.0
-
-# Configuración de predicciones
-PREDICTION_HORIZON=24  # horas
-PREDICTION_INTERVAL=1   # hora
-
-# Configuración del chatbot
-CHATBOT_LANGUAGE=es
-CHATBOT_TIMEZONE=America/Bogota
-CHATBOT_MAX_TOKENS=1000
-
-# ========================================
-# CONFIGURACIÓN DE NOTIFICACIONES
-# ========================================
-
-# Configuración de alertas
-ALERT_WIND_SPEED_THRESHOLD=30  # km/h
-ALERT_TEMPERATURE_THRESHOLD=35  # °C
-ALERT_EMAIL_ENABLED=True
-ALERT_SMS_ENABLED=False
-
-# ========================================
-# CONFIGURACIÓN DE BACKUP
-# ========================================
-
-# Configuración de respaldos
-BACKUP_ENABLED=True
-BACKUP_FREQUENCY=daily
-BACKUP_RETENTION_DAYS=30
-BACKUP_PATH=backups/
-
-# ========================================
-# NOTAS IMPORTANTES
-# ========================================
-
-# 1. NUNCA subas este archivo a Git
-# 2. Usa .env.example para el template
-# 3. Cambia todas las contraseñas por defecto
-# 4. Usa contraseñas fuertes y únicas
-# 5. Rota las API keys regularmente
-# 6. Usa variables de entorno en producción
-
-# ========================================
-# INSTRUCCIONES DE USO
-# ========================================
-
-# Para usar estas variables en Python:
-# from dotenv import load_dotenv
-# import os
-# load_dotenv()
-# api_key = os.getenv('OPENWEATHER_API_KEY')
-
-# Para usar en Docker:
-# docker run -e OPENWEATHER_API_KEY=tu_key imagen
-
-# Para usar en producción:
-# export OPENWEATHER_API_KEY=tu_key 
+annotated-types==0.7.0
+anyio==4.10.0
+appnope==0.1.4
+asttokens==3.0.0
+async-timeout==4.0.3
+certifi==2025.7.14
+charset-normalizer==3.4.2
+colorama==0.4.6
+comm==0.2.3
+contourpy==1.3.2
+cycler==0.12.1
+debugpy==1.8.15
+decorator==5.2.1
+distro==1.9.0
+dotenv==0.9.9
+exceptiongroup==1.3.0
+executing==2.2.0
+fonttools==4.59.0
+greenlet==3.2.3
+h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
+idna==3.10
+ipykernel==6.30.0
+ipython==8.37.0
+jedi==0.19.2
+jiter==0.10.0
+jsonpatch==1.33
+jsonpointer==3.0.0
+jupyter_client==8.6.3
+jupyter_core==5.8.1
+kiwisolver==1.4.8
+langchain==0.3.27
+langchain-core==0.3.72
+langchain-openai==0.3.28
+langchain-text-splitters==0.3.9
+langsmith==0.4.12
+matplotlib==3.10.3
+matplotlib-inline==0.1.7
+nest-asyncio==1.6.0
+numpy==2.2.6
+openai==1.99.1
+orjson==3.11.1
+packaging==25.0
+pandas==2.3.1
+parso==0.8.4
+pexpect==4.9.0
+pillow==11.3.0
+platformdirs==4.3.8
+prompt_toolkit==3.0.51
+psutil==7.0.0
+ptyprocess==0.7.0
+pure_eval==0.2.3
+pydantic==2.11.7
+pydantic_core==2.33.2
+Pygments==2.19.2
+pyparsing==3.2.3
+python-dateutil==2.9.0.post0
+python-dotenv==1.1.1
+pytz==2025.2
+PyYAML==6.0.2
+pyzmq==27.0.0
+regex==2025.7.34
+requests==2.32.4
+requests-toolbelt==1.0.0
+six==1.17.0
+sniffio==1.3.1
+SQLAlchemy==2.0.42
+stack-data==0.6.3
+style==1.1.0
+tenacity==9.1.2
+tiktoken==0.10.0
+tornado==6.5.1
+tqdm==4.67.1
+traitlets==5.14.3
+typing-inspection==0.4.1
+typing_extensions==4.14.1
+tzdata==2025.2
+update==0.0.1
+urllib3==2.5.0
+wcwidth==0.2.13
+zstandard==0.23.0
