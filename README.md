@@ -1,127 +1,127 @@
 # GuajiraWindForecast 🌬️
 
-## Descripción del Proyecto
+## Project Description
 
-Sistema de pronóstico de viento para La Guajira utilizando inteligencia artificial y un chatbot conversacional. El proyecto integra datos climáticos de múltiples fuentes para proporcionar predicciones precisas y accesibles a través de una interfaz conversacional.
+Wind forecasting system for La Guajira using artificial intelligence and a conversational chatbot. The project integrates climate data from multiple sources to provide accurate and accessible predictions through a conversational interface.
 
-## Estructura del Proyecto
+## Project Structure
 
 ```
 GuajiraWindForecast/
 │
-├── 📁 data/                         # Datos crudos y procesados
-│   ├── raw/                         # Datos sin procesar desde la API
-│   ├── processed/                   # Datos limpios, transformados
-│   └── external/                    # Datasets adicionales (IDEAM, NASA, etc.)
+├── 📁 data/                         # Raw and processed data
+│   ├── raw/                         # Unprocessed data from API
+│   ├── processed/                   # Clean, transformed data
+│   └── external/                    # Additional datasets (IDEAM, NASA, etc.)
 │
-├── 📁 notebooks/                    # Análisis exploratorio y prototipos
+├── 📁 notebooks/                    # Exploratory analysis and prototypes
 │
-├── 📁 src/                          # Código fuente del proyecto
+├── 📁 src/                          # Project source code
 │   ├── __init__.py
-│   ├── 📁 api/                      # Módulos para consumir API climática
-│   ├── 📁 preprocessing/            # Limpieza y transformación de datos
-│   ├── 📁 forecasting/              # Modelos de predicción
-│   ├── 📁 chatbot/                  # ChatBot conversacional (LangChain, RAG, etc.)
-│   ├── 📁 visualization/            # Gráficos y estadísticas
-│   ├── 📁 server/                   # Backend para interacción local
-│   └── 📁 config/                   # Configuración y parámetros
+│   ├── 📁 api/                      # Modules for consuming climate API
+│   ├── 📁 preprocessing/            # Data cleaning and transformation
+│   ├── 📁 forecasting/              # Prediction models
+│   ├── 📁 chatbot/                  # Conversational ChatBot (LangChain, RAG, etc.)
+│   ├── 📁 visualization/            # Charts and statistics
+│   ├── 📁 server/                   # Backend for local interaction
+│   └── 📁 config/                   # Configuration and parameters
 │
-├── 📁 tests/                        # Pruebas unitarias
+├── 📁 tests/                        # Unit tests
 │
-├── .env                             # Variables de entorno (API keys, rutas)
-├── requirements.txt                 # Dependencias del proyecto
-├── Dockerfile                       # (opcional) Para contenerización local
-├── README.md                        # Descripción del proyecto
+├── .env                             # Environment variables (API keys, paths)
+├── requirements.txt                 # Project dependencies
+├── Dockerfile                       # (optional) For local containerization
+├── README.md                        # Project description
 └── main.py 
 ```
 
-## Características Principales
+## Main Features
 
-- **Predicción de Viento**: Modelos de machine learning para pronosticar velocidades y direcciones del viento
-- **Chatbot Inteligente**: Interfaz conversacional usando LangChain y RAG
-- **Integración Multi-Fuente**: Datos de IDEAM, NASA, OpenWeather y otras APIs
-- **Visualización Avanzada**: Gráficos interactivos y reportes automáticos
-- **API REST**: Backend para integración con aplicaciones externas
+- **Wind Prediction**: Machine learning models to forecast wind speeds and directions
+- **Intelligent Chatbot**: Conversational interface using LangChain and RAG
+- **Multi-Source Integration**: Data from IDEAM, NASA, OpenWeather and other APIs
+- **Advanced Visualization**: Interactive charts and automatic reports
+- **REST API**: Backend for integration with external applications
 
-## Tecnologías Utilizadas
+## Technologies Used
 
 - **Python 3.11+**
-- **LangChain** para el chatbot
-- **FastAPI** para el servidor backend
-- **Pandas/NumPy** para procesamiento de datos
-- **Scikit-learn/Prophet** para modelos de predicción
-- **Plotly/Matplotlib** para visualización
-- **Docker** para contenerización
+- **LangChain** for the chatbot
+- **FastAPI** for the backend server
+- **Pandas/NumPy** for data processing
+- **Scikit-learn/Prophet** for prediction models
+- **Plotly/Matplotlib** for visualization
+- **Docker** for containerization
 
-## Instalación
+## Installation
 
-1. Clonar el repositorio:
+1. Clone the repository:
 ```bash
-git clone <url-del-repositorio>
+git clone <repository-url>
 cd GuajiraWindForecast
 ```
 
-2. Crear entorno virtual:
+2. Create virtual environment:
 ```bash
 python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-3. Instalar dependencias:
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Configurar variables de entorno:
+4. Configure environment variables:
 ```bash
 cp .env.example .env
-# Editar .env con tus API keys
+# Edit .env with your API keys
 ```
 
-## Uso
+## Usage
 
-### Ejecutar el servidor local:
+### Run local server:
 ```bash
 python main.py
 ```
 
-### Ejecutar con Docker:
+### Run with Docker:
 ```bash
 docker build -t guajira-wind-forecast .
 docker run -p 8000:8000 guajira-wind-forecast
 ```
 
-## Desarrollo
+## Development
 
-### Estructura de Pruebas
-- **Carpeta `tests/`**: Contiene todas las pruebas unitarias del proyecto
-- **Pruebas por módulo**: Cada módulo tiene sus correspondientes pruebas
-- **Documentación de pruebas**: Los tests están documentados en el README
+### Test Structure
+- **`tests/` folder**: Contains all unit tests for the project
+- **Tests by module**: Each module has its corresponding tests
+- **Test documentation**: Tests are documented in the README
 
-### Flujo de Trabajo
-1. Desarrollo en notebooks para prototipos
-2. Implementación en módulos src/
-3. Pruebas unitarias en tests/
-4. Integración y despliegue
+### Workflow
+1. Development in notebooks for prototypes
+2. Implementation in src/ modules
+3. Unit tests in tests/
+4. Integration and deployment
 
-## Contribución
+## Contributing
 
-1. Fork el proyecto
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
+1. Fork the project
+2. Create a branch for your feature (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Licencia
+## License
 
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
+This project is under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contacto
+## Contact
 
-- **Autor**: [Tu Nombre]
-- **Email**: [tu.email@ejemplo.com]
-- **Proyecto**: [https://github.com/usuario/GuajiraWindForecast]
+- **Author**: [Your Name]
+- **Email**: [ealeongomez@unal.edu.co]
+- **Project**: [https://github.com/user/GuajiraWindForecast]
 
 ---
 
-**Nota**: Este proyecto está en desarrollo activo. La estructura puede evolucionar según las necesidades del proyecto. 
+**Note**: This project is under active development. The structure may evolve according to project needs. 
