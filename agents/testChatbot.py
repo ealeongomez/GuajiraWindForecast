@@ -37,6 +37,12 @@ api_key = os.getenv("OPENAI_API_KEY")
 openai_model = os.getenv("OPENAI_MODEL")
 
 # ==============================================================================
+# Variables
+# ==============================================================================
+
+municipios = ["riohacha", "maicao", "uribia"]
+
+# ==============================================================================
 # 🔗 LangChain Components
 # ==============================================================================
 
@@ -73,7 +79,6 @@ Agente:
 """
 )
 
-
 router_chain = LLMChain(
     llm=llm,
     prompt=prompt_template,
@@ -101,8 +106,19 @@ def main():
             if question.lower() in ["exit", "salir", "quit"]:
                 break
 
-            response = router_chain.invoke({"question": question})
-            print(Fore.YELLOW + "🤖 Bot: " + Fore.RESET + response["text"])
+            # 🔄 Ejecutamos el superagente con memoria conversacional
+            response = router_chain.run({"question": question}).strip().lower()
+
+            if response in municipios:
+                # 🚀 Redireccionamos al subagente correspondiente
+                final_response = response
+                print(Fore.YELLOW + f"📡 Enrutado a {response}: " + Fore.RESET + final_response)
+                break  # Finaliza sesión luego del enrutamiento
+            elif response == "general":
+                print(Fore.YELLOW + "🤖 Bot: " + Fore.RESET + "¿Podrías indicarme el municipio de La Guajira que te interesa?")
+            else:
+                # 🗨️ Respuesta parcial del superagente, conversación aún sin identificar municipio
+                print(Fore.YELLOW + "🤖 Bot: " + Fore.RESET + response)
 
     except KeyboardInterrupt:
         print(Fore.RED + "\n🔴 Interrupted by user." + Fore.RESET)
@@ -110,6 +126,7 @@ def main():
         print(Fore.RED + f"❌ Error: {e}" + Fore.RESET)
     finally:
         print(Fore.BLUE + "🔵 Dispatcher session ended." + Fore.RESET)
+
 
 if __name__ == "__main__":
     main()
