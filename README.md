@@ -22,6 +22,7 @@ GuajiraWindForecast/
 │   ├── 📁 preprocessing/            # Data cleaning and transformation
 │   ├── 📁 forecasting/              # Prediction models
 │   ├── 📁 chatbot/                  # Conversational ChatBot (LangChain, RAG, etc.)
+│   ├── 📁 prompts/                  # Prompt templates and constants
 │   ├── 📁 visualization/            # Charts and statistics
 │   ├── 📁 server/                   # Backend for local interaction
 │   └── 📁 config/                   # Configuration and parameters
@@ -93,10 +94,22 @@ docker run -p 8000:8000 guajira-wind-forecast
 
 ## Development
 
+### Project Organization
+- **`src/prompts/` folder**: Contains all prompt templates and constants
+- **Modular prompts**: Each prompt type has its own file
+- **Centralized constants**: All system constants in one place
+- **Easy imports**: Simple import structure for all prompts
+
 ### Test Structure
 - **`tests/` folder**: Contains all unit tests for the project
 - **Tests by module**: Each module has its corresponding tests
 - **Test documentation**: Tests are documented in the README
+
+### Prompt Management
+- **Organized prompts**: All prompts stored in `src/prompts/`
+- **Reusable templates**: Prompts can be imported and reused
+- **Version control**: Easy to track changes in prompts
+- **Documentation**: Complete documentation for each prompt
 
 ### Workflow
 1. Development in notebooks for prototypes
