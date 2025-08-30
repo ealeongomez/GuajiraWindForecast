@@ -119,6 +119,151 @@ class ClimateDataDownloader:
             print(f"❌ Error obteniendo datos para {municipio}: {e}")
             return pd.DataFrame()
     
+    def fetch_wind_data_only(self, municipio: str, lat: float, lon: float) -> pd.DataFrame:
+        """
+        Consulta Open-Meteo y obtiene únicamente datos de velocidad del viento.
+        
+        Args:
+            municipio: Nombre del municipio
+            lat: Latitud
+            lon: Longitud
+            
+        Returns:
+            DataFrame con datos de velocidad del viento
+        """
+        print(f"🌬️ Descargando datos de viento para {municipio}...")
+        
+        url = "https://archive-api.open-meteo.com/v1/archive"
+        params = {
+            "latitude": lat,
+            "longitude": lon,
+            "start_date": self.start_date,
+            "end_date": self.end_date,
+            "hourly": "wind_speed_10m,wind_direction_10m",  # Solo datos de viento
+            "timezone": "America/Bogota"
+        }
+
+        try:
+            response = self.session.get(url, params=params)
+            response.raise_for_status()
+            data = response.json()
+
+            df = pd.DataFrame({
+                "datetime": data["hourly"]["time"],
+                "wind_speed_10m": data["hourly"]["wind_speed_10m"],
+                "wind_direction_10m": data["hourly"]["wind_direction_10m"]
+            })
+
+            df["datetime"] = pd.to_datetime(df["datetime"])
+            df["hour"] = df["datetime"].dt.hour
+            df["date"] = df["datetime"].dt.date
+            df["municipio"] = municipio
+
+            # Filtro por hora
+            df = df[(df["hour"] >= self.start_hour) & (df["hour"] <= self.end_hour)]
+            
+            print(f"✅ Datos de viento obtenidos para {municipio}: {len(df)} registros")
+            return df
+            
+        except Exception as e:
+            print(f"❌ Error obteniendo datos de viento para {municipio}: {e}")
+            return pd.DataFrame()
+    
+    def save_wind_data(self, df: pd.DataFrame, municipio: str) -> str:
+        """
+        Guarda los datos de viento como CSV en la ruta especificada.
+        
+        Args:
+            df: DataFrame con los datos de viento
+            municipio: Nombre del municipio
+            
+        Returns:
+            Ruta del archivo guardado
+        """
+        if df.empty:
+            print(f"⚠️  No hay datos de viento para guardar de {municipio}")
+            return ""
+            
+        filename = f"wind_data_{municipio.lower().replace('_', '_')}_{self.start_date}_{self.end_date}.csv"
+        filepath = self.data_dir / filename
+        df.to_csv(filepath, index=False)
+        print(f"💾 Datos de viento guardados: {filepath}")
+        return str(filepath)
+    
+    def download_single_city(self, city_name: str, lat: float = None, lon: float = None) -> Dict[str, any]:
+        """
+        Descarga datos de velocidad del viento para una ciudad específica
+        
+        Args:
+            city_name: Nombre de la ciudad
+            lat: Latitud (opcional, si no se proporciona se busca en municipios predefinidos)
+            lon: Longitud (opcional, si no se proporciona se busca en municipios predefinidos)
+            
+        Returns:
+            Diccionario con DataFrame de datos de viento y ruta del archivo guardado
+        """
+        print(f"🌬️ Descargando datos de velocidad del viento para: {city_name}")
+        print(f"📅 Período: {self.start_date} a {self.end_date}")
+        print(f"⏰ Horario: {self.start_hour}:00 a {self.end_hour}:00")
+        print("=" * 50)
+        
+        # Verificar si la ciudad está en los municipios predefinidos
+        if lat is None or lon is None:
+            if city_name in self.municipios:
+                lat, lon = self.municipios[city_name]
+                print(f"📍 Usando coordenadas predefinidas para {city_name}: ({lat}, {lon})")
+            else:
+                print(f"❌ Error: {city_name} no está en la lista de municipios predefinidos")
+                print(f"   Municipios disponibles: {list(self.municipios.keys())}")
+                print(f"   Por favor, proporciona latitud y longitud manualmente")
+                return {"data": pd.DataFrame(), "filepath": "", "success": False}
+        else:
+            print(f"📍 Usando coordenadas proporcionadas: ({lat}, {lon})")
+        
+        # Descargar datos usando función específica para viento
+        df = self.fetch_wind_data_only(city_name, lat, lon)
+        
+        if not df.empty:
+            # Guardar datos
+            filepath = self.save_wind_data(df, city_name)
+            
+            # Generar estadísticas de viento
+            stats = {
+                "total_records": len(df),
+                "date_range": {
+                    "start": df['date'].min().strftime("%Y-%m-%d"),
+                    "end": df['date'].max().strftime("%Y-%m-%d")
+                },
+                "wind_stats": {
+                    "mean": df['wind_speed_10m'].mean(),
+                    "max": df['wind_speed_10m'].max(),
+                    "min": df['wind_speed_10m'].min(),
+                    "std": df['wind_speed_10m'].std(),
+                    "median": df['wind_speed_10m'].median()
+                }
+            }
+            
+            print(f"\n✅ Descarga de datos de viento completada para {city_name}")
+            print(f"   - Registros obtenidos: {stats['total_records']}")
+            print(f"   - Velocidad promedio: {stats['wind_stats']['mean']:.1f} km/h")
+            print(f"   - Velocidad máxima: {stats['wind_stats']['max']:.1f} km/h")
+            print(f"   - Archivo guardado: {filepath}")
+            
+            return {
+                "data": df,
+                "filepath": filepath,
+                "stats": stats,
+                "success": True
+            }
+        else:
+            print(f"❌ No se pudieron obtener datos de viento para {city_name}")
+            return {
+                "data": pd.DataFrame(),
+                "filepath": "",
+                "stats": {},
+                "success": False
+            }
+
     def save_data(self, df: pd.DataFrame, municipio: str) -> str:
         """
         Guarda los datos como CSV en la ruta especificada.
@@ -290,7 +435,39 @@ def main():
         end_hour=18
     )
     
-    # Descargar todos los datos
+    # Ejemplo 1: Descargar datos de viento de una ciudad específica (usando coordenadas predefinidas)
+    print("\n" + "="*60)
+    print("🌬️ EJEMPLO 1: Descarga de datos de viento (Riohacha)")
+    print("="*60)
+    
+    result_riohacha = downloader.download_single_city("Riohacha")
+    if result_riohacha["success"]:
+        print(f"📊 Estadísticas de viento de Riohacha:")
+        stats = result_riohacha["stats"]
+        print(f"   - Registros: {stats['total_records']}")
+        print(f"   - Velocidad promedio: {stats['wind_stats']['mean']:.1f} km/h")
+        print(f"   - Velocidad máxima: {stats['wind_stats']['max']:.1f} km/h")
+        print(f"   - Velocidad mínima: {stats['wind_stats']['min']:.1f} km/h")
+        print(f"   - Desviación estándar: {stats['wind_stats']['std']:.1f} km/h")
+    
+    # Ejemplo 2: Descargar datos de viento con coordenadas personalizadas
+    print("\n" + "="*60)
+    print("🌬️ EJEMPLO 2: Descarga de datos de viento con coordenadas personalizadas")
+    print("="*60)
+    
+    # Coordenadas de ejemplo para una ubicación personalizada
+    custom_lat, custom_lon = 11.5447, -72.9072  # Coordenadas de Riohacha como ejemplo
+    result_custom = downloader.download_single_city("Ubicacion_Personalizada", custom_lat, custom_lon)
+    if result_custom["success"]:
+        print(f"📊 Datos de viento obtenidos para ubicación personalizada")
+        print(f"   - Velocidad promedio: {result_custom['stats']['wind_stats']['mean']:.1f} km/h")
+        print(f"   - Archivo guardado: {result_custom['filepath']}")
+    
+    # Ejemplo 3: Descargar todos los datos (función original)
+    print("\n" + "="*60)
+    print("🌬️ EJEMPLO 3: Descarga de todos los municipios")
+    print("="*60)
+    
     data_dict = downloader.download_all_data()
     
     # Generar y mostrar reporte
