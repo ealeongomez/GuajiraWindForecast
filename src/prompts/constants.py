@@ -21,13 +21,8 @@ MUNICIPIOS = [
 
 # Temas climáticos disponibles
 TEMAS = [
-    "pronóstico (hoy/48h/7d)",
-    "viento (velocidad/dirección/ráfagas)",
-    "temperatura y sensación térmica",
-    "humedad y nubosidad",
-    "precipitación/lluvia",
-    "radiación solar/UV",
-    "alertas (olas de calor, tormentas)"
+        "viento (velocidad/dirección/ráfagas)",
+        "pronóstico de viento (1h/24)"
 ]
 
 # Patrones de despedida
