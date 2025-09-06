@@ -18,7 +18,7 @@ warnings.filterwarnings("ignore")
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(dotenv_path=PROJECT_ROOT / ".env")
 
-BOT_TOKEN = "8481778826:AAE3Q_vdY2vi6EjoMJZZ5nC5FgX3ny2mo4c"
+BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 CSV_PATH = os.getenv("CSV_PATH", "data/raw/wind_data_riohacha_2024-08-30_2025-08-30.csv")
@@ -137,6 +137,8 @@ async def on_message(update: Update, _: ContextTypes.DEFAULT_TYPE):
 # 🧭 Main
 # ==============================================================================
 def main():
+
+    print(f"Initializing Telegram bot...")
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     # Asegura que /start no llegue al handler de texto:
